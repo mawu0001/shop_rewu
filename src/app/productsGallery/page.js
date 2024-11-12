@@ -12,7 +12,7 @@ export default async function Products(){
                 return (
                     <div key={product.id} className="p-3 rounded-lg">
                         <Image src={product.thumbnail} width={250} height={250} alt={product.title}/>
-                        <Link href={`/detaljer/${product.id}`}>{product.title}</Link>
+                        <Link href={`/product/${product.id}`}>{product.title}</Link>
                     </div>
                 );
             })}
