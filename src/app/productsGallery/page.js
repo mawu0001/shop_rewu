@@ -1,4 +1,3 @@
-// page.js
 "use client";
 import Link from "next/link";
 import Image from "next/image";
@@ -48,41 +47,45 @@ export default function Products() {
   };
 
   return (
-    <div className="grid grid-cols-[1fr_1fr_1fr] relative ">
-      {data.map((product) => (
-        <article key={product.id}>
-          <div className="p-3 rounded-lg">
-            <Link href={`/product/${product.id}`} className="grid grid-rows-4">
-              <Image
-                className="row-start-1 row-span-2"
-                src={product.thumbnail}
-                width={250}
-                height={250}
-                alt={product.title}
-              />
-              <p className="uppercase font-semibold text-xs row-start-3">
-                {product.brand}
-              </p>
-              <div className="grid grid-cols-2 text-xs place-content-evenly row-start-4">
-                <p>{product.title}</p>
-                <p className="text-end">${product.price}</p>
-              </div>
-            </Link>
-            <button
-              onClick={() => addToCart(product)}
-              className="bg-green text-saddle50 rounded-3xl px-3 py-1 row-start-5"
-            >
-              <span>Add to Cart</span>
-            </button>
-          </div>
-        </article>
-      ))}
-      {/* Pass cartItems and removeFromCart function as props to Cart */}
-      <Cart
-        items={cartItems}
-        removeFromCart={removeFromCart}
-        className="grid-cols-4 row-span-6"
-      />
+    <div className="grid grid-cols-7 relative">
+      <div className="grid grid-cols-3 col-span-5">
+        {data.map((product) => (
+          <article key={product.id}>
+            <div className="p-3 rounded-lg">
+              <Link
+                href={`/product/${product.id}`}
+                className="grid grid-rows-4"
+              >
+                <Image
+                  className="row-start-1 row-span-2"
+                  src={product.thumbnail}
+                  width={250}
+                  height={250}
+                  alt={product.title}
+                />
+                <p className="uppercase font-semibold text-xs row-start-3">
+                  {product.brand}
+                </p>
+                <div className="grid grid-cols-2 text-xs place-content-evenly row-start-4">
+                  <p>{product.title}</p>
+                  <p className="text-end">${product.price}</p>
+                </div>
+              </Link>
+              <button
+                onClick={() => addToCart(product)}
+                className="bg-green text-saddle50 rounded-3xl px-3 py-1 row-start-5"
+              >
+                <span>Add to Cart</span>
+              </button>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      {/* Cart component will appear in the 4th column for larger screens */}
+      <div className="col-start-6 col-span-2">
+        <Cart items={cartItems} removeFromCart={removeFromCart} />
+      </div>
     </div>
   );
 }
