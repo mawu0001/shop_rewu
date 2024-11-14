@@ -23,7 +23,7 @@ const Singleview = async ({ params }) => {
         <div className="text-lg font-light">{product.category}</div>
         <div className="text-normal font-medium">{product.description}</div>
       </div>
-      <Accordion />
+      <Accordion productId={id}/>
     </section>
   );
 };

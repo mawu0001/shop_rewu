@@ -1,37 +1,38 @@
-"use client";
+'use client';
 
 import { useState, useEffect } from "react";
 import Item from "./Item";
 
-const Accordion = () => {
+const Accordion = ({ productId }) => {
   const [isOpen, setIsOpen] = useState(0);
-  const [aboutData, setAboutData] = useState([]);
+  const [aboutData, setAboutData] = useState(null);
 
   useEffect(() => {
     const fetchAboutData = async () => {
-      const response = await fetch("https://dummyjson.com/products");
+      const response = await fetch(`https://dummyjson.com/products/${productId}`);
       const data = await response.json();
-      setAboutData(data.products);
+      setAboutData(data); 
     };
     fetchAboutData();
-  }, []);
+  }, [productId]); 
 
   return (
-    <section className="w-full max-w-2xl mx-auto  px-4 md:px-6 py-24 rounded-lg bg-saddle50">
-      <h1 className="text-saddle900 text-xl pb-4">About</h1>
-      {aboutData.map((item) => (
+    <section className="w-full max-w-2xl mx-auto px-4 md:px-6 py-24 rounded-lg bg-saddle50">
+      {aboutData ? (
         <Item
-          key={item.id}
+          key={aboutData.id}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
-          // sender item={item.id} som prop til Item komponentet
-          item={item.id}
-          weight={item.weight}
-          height={item.height}
-          depth={item.depth}
-          tags={item.tags}
+          item={aboutData.id}
+          weight={aboutData.weight}
+          height={aboutData.dimensions?.height}
+          width={aboutData.dimensions?.width}
+          depth={aboutData.dimensions?.depth}
+          tags={aboutData.tags}
         />
-      ))}
+      ) : (
+        <p>Loading about data...</p> 
+      )}
     </section>
   );
 };
