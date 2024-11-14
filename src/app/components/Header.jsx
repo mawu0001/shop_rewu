@@ -7,42 +7,50 @@ const Header = () => {
 
   return (
     <header
-      className={`p-5 bg-saddle900 dark:bg-saddle50 text-saddle50 dark:text-saddle900 text-transform: uppercase transition duration-200 ease-linear${
-        isMenuDisplayed ? " p-0 transition duration-200 ease-linear" : ""
-      }`}
+      className={`z-40 bg-saddle900 dark:bg-saddle50 text-saddle50 dark:text-saddle900 uppercase transition duration-200 ease-linear`}
     >
-      <nav className="flex place-content-between relative">
+      <nav className="flex justify-between items-center relative">
+        <p className="font-semibold m-4">rewu</p>
+
         <div
-          className="w-8 h-5 cursor-pointer block"
+          className="w-8 h-5 cursor-pointer block md:hidden m-4"
           onClick={() => setIsMenuDisplayed(!isMenuDisplayed)}
         >
           <div
-            className={`w-full h-0.5 bg-saddle50 mb-1.5 transition duration-200 ease-linear ${
+            className={`w-full h-0.5 bg-saddle50 dark:bg-saddle900 mb-1.5 transition duration-200 ease-linear ${
               isMenuDisplayed ? "rotate-45" : ""
             }`}
           ></div>
           <div
-            className={`w-full h-0.5 bg-saddle50 mb-1.5 transition duration-150 ease-linear ${
-              isMenuDisplayed ? "opacity-0" : "opacity-100"
+            className={`w-full h-0.5 bg-saddle50 dark:bg-saddle900 mb-1.5 transition duration-200 ease-linear ${
+              isMenuDisplayed ? "-rotate-45" : ""
             }`}
           ></div>
           <div
-            className={`w-full h-0.5 bg-saddle50 mb-1.5 transition duration-200 ease-linear ${
-              isMenuDisplayed ? "-rotate-45" : ""
+            className={`w-full h-0.5 bg-saddle50 dark:bg-saddle900 mb-1.5 transition duration-150 ease-linear ${
+              isMenuDisplayed ? "opacity-0" : "opacity-100"
             }`}
           ></div>
         </div>
         {isMenuDisplayed && (
-          <ul className="flex flex-col place-content-start place-items-center absolute top-full left-0 z-10 pb-8 h-screen min-w-full bg-saddle900">
+          <ul className="flex flex-col items-center absolute top-full left-0 z-10 pb-8 h-screen w-full bg-saddle900 dark:bg-saddle50 md:hidden">
             <Link href="/">
-              <li>Home</li>
+              <li className="py-2">Home</li>
             </Link>
             <Link href="/productsGallery">
-              <li>Products</li>
+              <li className="py-2">Products</li>
             </Link>
           </ul>
         )}
-        <p className="font-semibold">rewu</p>
+
+        <ul className="hidden md:flex space-x-8">
+          <Link href="/">
+            <li className="hover:underline">Home</li>
+          </Link>
+          <Link href="/productsGallery">
+            <li className="hover:underline">Products</li>
+          </Link>
+        </ul>
       </nav>
     </header>
   );

@@ -30,18 +30,16 @@ const Cart = ({ items, removeFromCart }) => {
   };
 
   return (
-    <section className="top-0 right-0 absolute md:relative z-20 bg-saddle50 dark:bg-saddle900 text-saddle900 dark:text-saddle50 stroke-saddle900 dark:stroke-saddle50 border p-6 rounded-lg h-fit w-full lg:w-full xl:w-full">
+    <section className="top-0 right-0 absolute md:relative  bg-saddle50 dark:bg-saddle900 text-saddle900 dark:text-saddle50 stroke-saddle900 dark:stroke-saddle50 border p-6 rounded-lg h-fit w-full lg:w-full xl:w-full">
       <header
-        className="flex place-content-center place-items-center place-self-center p-2 md:hidden"
+        className="flex place-content-center place-items-center place-self-center p-2 md:hidden transition duration-200 ease-linear "
         onClick={() => setIsOpen(!isOpen)}
       >
         {!isOpen && <RiShoppingCart2Line />}
       </header>
 
       <div
-        className={`absolute inset-0 bg-black bg-opacity-50 md:hidden ${
-          isOpen ? "block" : "hidden"
-        }`}
+        className={`absolute inset-0  md:hidden ${isOpen ? "block" : "hidden"}`}
         onClick={() => setIsOpen(false)}
       />
 
@@ -57,28 +55,34 @@ const Cart = ({ items, removeFromCart }) => {
           />
         )}
         <p className="text-center font-semibold">Cart</p>
-        <ul>
+        <ul className=" flex flex-col gap-4">
           {items.map((item) => (
             <li
               key={item.id}
-              className="my-2 grid grid-cols-4 text-xs place-items-center"
+              className="my-2 grid text-xs  sm:text-sm md:text-base l:text-l"
             >
-              <Image
+              {/* <Image
                 src={item.image}
                 width={250}
                 height={250}
                 alt={item.title}
-              />
-              <p className="col-start-1">{item.title}</p>
-              <p className="col-start-2">{item.count}</p>
-              <button
-                onClick={() => removeFromCart(item.id)}
-                className="text-saddle50 p-1"
-                title="Remove one from cart"
-              >
-                <BsTrash3 />
-              </button>
-              <p>${item.price}</p>
+              /> */}
+              <div className="flex place-content-between gap-2">
+                <p className="col-start-1">{item.title}</p>
+                <p>${item.price}</p>
+              </div>
+              <div className="flex gap-2 place-items-start align-middle">
+                <button
+                  onClick={() => removeFromCart(item.id)}
+                  className="text-saddle50 p-1"
+                  title="Remove one from cart"
+                >
+                  <BsTrash3 />
+                </button>
+                <p className=" text-saddle900 dark:text-saddle50 stroke-saddle900 border w-fit rounded-3xl px-8 py-1.5 ">
+                  {item.count}
+                </p>
+              </div>
             </li>
           ))}
         </ul>
@@ -89,7 +93,7 @@ const Cart = ({ items, removeFromCart }) => {
         </div>
         <button
           onClick={handleCheckout}
-          className="w-full hover:bg-green border stroke-green hover:text-white text-saddle900 py-2 px-4 rounded-3xl transition-colors mt-4"
+          className="w-full hover:bg-green border stroke-green hover:text-saddle50 text-saddle900 dark:text-saddle50 py-2 px-4 rounded-3xl transition-colors mt-4"
         >
           Proceed to Checkout
         </button>

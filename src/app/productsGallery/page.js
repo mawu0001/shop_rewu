@@ -36,22 +36,21 @@ export default function Products() {
 
   // Function to remove a product from the cart
   const removeFromCart = (productId) => {
-    setCartItems(
-      (prevItems) =>
-        prevItems
-          .map((item) =>
-            item.id === productId ? { ...item, count: item.count - 1 } : item
-          )
-          .filter((item) => item.count > 0) // Remove items with count 0
+    setCartItems((prevItems) =>
+      prevItems
+        .map((item) =>
+          item.id === productId ? { ...item, count: item.count - 1 } : item
+        )
+        .filter((item) => item.count > 0)
     );
   };
 
   return (
-    <div className="grid grid-cols-7 relative">
-      <div className="grid grid-cols-3 col-span-7 md:col-span-5">
+    <div className="grid grid-cols-7 relative my-8 gap-4">
+      <div className="grid grid-cols-3 col-span-7 md:col-span-5 gap-4 place-content-center">
         {data.map((product) => (
           <article key={product.id}>
-            <div className="p-3 rounded-lg">
+            <div className="p-3 rounded-lg bg-saddle100 text-xs sm:text-sm md:text-base l:text-l flex flex-col place-items-center min-h-80 sm:min-h-96">
               <Link
                 href={`/product/${product.id}`}
                 className="grid grid-rows-3"
@@ -64,10 +63,10 @@ export default function Products() {
                   alt={product.title}
                 />
                 <div>
-                  <p className="uppercase font-semibold text-xs row-start-3">
+                  <p className="uppercase font-semibold row-start-3">
                     {product.brand}
                   </p>
-                  <div className="grid grid-cols-2 text-xs place-content-evenly row-start-4">
+                  <div className="grid grid-cols-2 place-content-evenly row-start-4">
                     <p>{product.title}</p>
                     <p className="text-end">${product.price}</p>
                   </div>
@@ -75,7 +74,7 @@ export default function Products() {
               </Link>
               <button
                 onClick={() => addToCart(product)}
-                className="hover:bg-green border stroke-green hover:text-white text-saddle900 py-2 px-4 rounded-3xl row-start-4"
+                className="hover:bg-green border hover:text-saddle50 text-saddle900 dark:text-saddle50 py-2 px-4 rounded-3xl"
               >
                 <span>Add to Cart</span>
               </button>
