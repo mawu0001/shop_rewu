@@ -48,7 +48,7 @@ export default function Products() {
 
   return (
     <div className="grid grid-cols-7 relative">
-      <div className="grid grid-cols-3 col-span-5">
+      <div className="grid grid-cols-3 col-span-7 md:col-span-5">
         {data.map((product) => (
           <article key={product.id}>
             <div className="p-3 rounded-lg">
