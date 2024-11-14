@@ -3,6 +3,7 @@
 import { RiShoppingCart2Line } from "react-icons/ri";
 import { BsFullscreenExit, BsTrash3 } from "react-icons/bs";
 import { useState } from "react";
+import Link from "next/link";
 
 const Cart = ({ items, removeFromCart }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -67,9 +68,11 @@ const Cart = ({ items, removeFromCart }) => {
             Total: ${calculateTotal().toFixed(2)}
           </p>
         </div>
-        <button className="bg-green py-1 px-3 rounded-3xl">
-          Proceed to Checkout
-        </button>
+        <Link href="/payment">
+          <button className="bg-green py-1 px-3 rounded-3xl">
+            Proceed to Checkout
+          </button>
+        </Link>
       </div>
     </section>
   );
