@@ -1,19 +1,36 @@
-// components/Cart.jsx
 "use client";
 import { RiShoppingCart2Line } from "react-icons/ri";
 import { BsFullscreenExit, BsTrash3 } from "react-icons/bs";
 import { useState } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Cart = ({ items, removeFromCart }) => {
   const [isOpen, setIsOpen] = useState(false);
-  // Calculate the total price of items in the cart
+  const router = useRouter();
+
   const calculateTotal = () => {
     return items.reduce((total, item) => total + item.price * item.count, 0);
   };
+
+  const handleCheckout = () => {
+    const cartData = items.map((item) => ({
+      id: item.id,
+      count: item.count,
+      price: item.price,
+      title: item.title,
+      image: item.image,
+    }));
+
+    const searchParams = new URLSearchParams();
+    searchParams.set("cart", JSON.stringify(cartData));
+    searchParams.set("total", calculateTotal().toFixed(2));
+
+    router.push(`/payment?${searchParams.toString()}`);
+  };
+
   return (
-    <section className="top-0 right-0 absolute md:relative z-20 bg-saddle900 dark:bg-saddle50 text-saddle50 dark:text-saddle900 stroke-saddle50 dark:stroke-saddle900 rounded-3xl h-fit w-full lg:w-full xl:w-full">
-      {/* Cart icon toggle button (only on mobile screens) */}
+    <section className="top-0 right-0 absolute md:relative z-20 bg-saddle50 dark:bg-saddle900 text-saddle900 dark:text-saddle50 stroke-saddle900 dark:stroke-saddle50 border p-6 rounded-lg h-fit w-full lg:w-full xl:w-full">
       <header
         className="flex place-content-center place-items-center place-self-center p-2 md:hidden"
         onClick={() => setIsOpen(!isOpen)}
@@ -21,7 +38,6 @@ const Cart = ({ items, removeFromCart }) => {
         {!isOpen && <RiShoppingCart2Line />}
       </header>
 
-      {/* Modal cart content (only visible on small screens when 'isOpen' is true) */}
       <div
         className={`absolute inset-0 bg-black bg-opacity-50 md:hidden ${
           isOpen ? "block" : "hidden"
@@ -29,13 +45,11 @@ const Cart = ({ items, removeFromCart }) => {
         onClick={() => setIsOpen(false)}
       />
 
-      {/* Cart content */}
       <div
-        className={`m-5 p-12 relative md:static md:min-w-80 ${
+        className={`m-5 p-6 rounded-lg relative md:static md:min-w-80 ${
           isOpen ? "block" : "hidden"
         } md:block`}
       >
-        {/* Close button only visible on mobile screens */}
         {isOpen && (
           <BsFullscreenExit
             className="absolute right-2 top-2 text-saddle50 dark:text-saddle900"
@@ -49,6 +63,12 @@ const Cart = ({ items, removeFromCart }) => {
               key={item.id}
               className="my-2 grid grid-cols-4 text-xs place-items-center"
             >
+              <Image
+                src={item.image}
+                width={250}
+                height={250}
+                alt={item.title}
+              />
               <p className="col-start-1">{item.title}</p>
               <p className="col-start-2">{item.count}</p>
               <button
@@ -62,17 +82,17 @@ const Cart = ({ items, removeFromCart }) => {
             </li>
           ))}
         </ul>
-        {/* Display the total price */}
         <div className="mt-4">
           <p className="text-center font-semibold">
             Total: ${calculateTotal().toFixed(2)}
           </p>
         </div>
-        <Link href="/payment">
-          <button className="bg-green py-1 px-3 rounded-3xl">
-            Proceed to Checkout
-          </button>
-        </Link>
+        <button
+          onClick={handleCheckout}
+          className="w-full hover:bg-green border stroke-green hover:text-white text-saddle900 py-2 px-4 rounded-3xl transition-colors mt-4"
+        >
+          Proceed to Checkout
+        </button>
       </div>
     </section>
   );

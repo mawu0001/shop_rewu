@@ -54,26 +54,28 @@ export default function Products() {
             <div className="p-3 rounded-lg">
               <Link
                 href={`/product/${product.id}`}
-                className="grid grid-rows-4"
+                className="grid grid-rows-3"
               >
                 <Image
-                  className="row-start-1 row-span-2"
+                  className="row-start-1 row-span-2 place-self-center"
                   src={product.thumbnail}
                   width={250}
                   height={250}
                   alt={product.title}
                 />
-                <p className="uppercase font-semibold text-xs row-start-3">
-                  {product.brand}
-                </p>
-                <div className="grid grid-cols-2 text-xs place-content-evenly row-start-4">
-                  <p>{product.title}</p>
-                  <p className="text-end">${product.price}</p>
+                <div>
+                  <p className="uppercase font-semibold text-xs row-start-3">
+                    {product.brand}
+                  </p>
+                  <div className="grid grid-cols-2 text-xs place-content-evenly row-start-4">
+                    <p>{product.title}</p>
+                    <p className="text-end">${product.price}</p>
+                  </div>
                 </div>
               </Link>
               <button
                 onClick={() => addToCart(product)}
-                className="bg-green text-saddle50 rounded-3xl px-3 py-1 row-start-5"
+                className="hover:bg-green border stroke-green hover:text-white text-saddle900 py-2 px-4 rounded-3xl row-start-4"
               >
                 <span>Add to Cart</span>
               </button>
