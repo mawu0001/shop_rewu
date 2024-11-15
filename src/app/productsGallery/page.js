@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Cart from "./components/Cart";
 import { useState, useEffect } from "react";
+import CTA from "./components/CTA";
 
 export default function Products() {
   const [data, setData] = useState([]);
@@ -36,47 +37,47 @@ export default function Products() {
 
   // Function to remove a product from the cart
   const removeFromCart = (productId) => {
-    setCartItems(
-      (prevItems) =>
-        prevItems
-          .map((item) =>
-            item.id === productId ? { ...item, count: item.count - 1 } : item
-          )
-          .filter((item) => item.count > 0) // Remove items with count 0
+    setCartItems((prevItems) =>
+      prevItems
+        .map((item) =>
+          item.id === productId ? { ...item, count: item.count - 1 } : item
+        )
+        .filter((item) => item.count > 0)
     );
   };
 
   return (
-    <div className="grid grid-cols-7 relative">
-      <div className="grid grid-cols-3 col-span-7 md:col-span-5">
+    <div className="grid grid-cols-7 relative my-8 gap-4">
+      <div className="grid grid-cols-3 col-span-7 md:col-span-5 gap-4 place-content-center">
         {data.map((product) => (
           <article key={product.id}>
-            <div className="p-3 rounded-lg">
+            <div className="p-3 rounded-lg bg-saddle100 text-xs sm:text-sm md:text-base l:text-l flex flex-col place-items-center min-h-80 sm:min-h-96">
               <Link
                 href={`/product/${product.id}`}
-                className="grid grid-rows-4"
+                className="grid grid-rows-3"
               >
                 <Image
-                  className="row-start-1 row-span-2"
+                  className="row-start-1 row-span-2 place-self-center"
                   src={product.thumbnail}
                   width={250}
                   height={250}
                   alt={product.title}
                 />
-                <p className="uppercase font-semibold text-xs row-start-3">
-                  {product.brand}
-                </p>
-                <div className="grid grid-cols-2 text-xs place-content-evenly row-start-4">
-                  <p>{product.title}</p>
-                  <p className="text-end">${product.price}</p>
+                <div>
+                  <p className="uppercase font-semibold row-start-3">
+                    {product.brand}
+                  </p>
+                  <div className="grid grid-cols-2 place-content-evenly row-start-4">
+                    <p>{product.title}</p>
+                    <p className="text-end">${product.price}</p>
+                  </div>
                 </div>
               </Link>
-              <button
-                onClick={() => addToCart(product)}
-                className="bg-green text-saddle50 rounded-3xl px-3 py-1 row-start-5"
-              >
-                <span>Add to Cart</span>
-              </button>
+              <CTA
+                content="Add to Cart"
+                addToCart={addToCart}
+                product={product}
+              />
             </div>
           </article>
         ))}
