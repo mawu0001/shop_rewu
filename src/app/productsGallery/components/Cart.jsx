@@ -14,23 +14,16 @@ const Cart = ({ items, removeFromCart }) => {
   };
 
   const handleCheckout = () => {
-    const cartData = items.map((item) => ({
-      id: item.id,
-      count: item.count,
-      price: item.price,
-      title: item.title,
-      image: item.image,
-    }));
+    const ids = items.map((item) => ({ id: item.id, count: item.count }));
 
     const searchParams = new URLSearchParams();
-    searchParams.set("cart", JSON.stringify(cartData));
-    searchParams.set("total", calculateTotal().toFixed(2));
+    searchParams.set("cartIds", JSON.stringify(ids));
 
     router.push(`/payment?${searchParams.toString()}`);
   };
 
   return (
-    <section className="top-0 right-0 absolute md:relative bg-saddle900  md:bg-saddle100  md:text-saddle900 text-saddle50  p-6 rounded-lg h-fit w-full lg:w-full xl:w-full">
+    <section className="top-0 right-0 absolute md:relative bg-saddle900 md:bg-saddle100 md:text-saddle900 text-saddle50 p-6 rounded-lg h-fit w-full lg:w-full xl:w-full">
       <header
         className="flex place-content-center place-items-center place-self-center p-2 md:hidden transition duration-200 ease-linear "
         onClick={() => setIsOpen(!isOpen)}
@@ -39,7 +32,7 @@ const Cart = ({ items, removeFromCart }) => {
       </header>
 
       <div
-        className={`absolute inset-0  md:hidden ${isOpen ? "block" : "hidden"}`}
+        className={`absolute inset-0 md:hidden ${isOpen ? "block" : "hidden"}`}
         onClick={() => setIsOpen(false)}
       />
 
@@ -55,12 +48,12 @@ const Cart = ({ items, removeFromCart }) => {
           />
         )}
         <p className="text-center font-semibold">Cart</p>
-        <ul className=" flex flex-col gap-4">
+        <ul className="flex flex-col gap-4">
           {items.map((item) => {
             return (
               <li
                 key={item.id}
-                className="my-2 flex  sm:text-sm md:text-base l:text-l w-full gap-3 place-items-center"
+                className="my-2 flex sm:text-sm md:text-base l:text-l w-full gap-3 place-items-center"
               >
                 <Image
                   src={item.thumbnail}
@@ -81,7 +74,7 @@ const Cart = ({ items, removeFromCart }) => {
                     >
                       <BsTrash3 />
                     </button>
-                    <p className=" md:text-saddle900 text-saddle50 stroke-saddle900 border w-fit rounded-3xl px-8 py-1.5 ">
+                    <p className="md:text-saddle900 text-saddle50 stroke-saddle900 border w-fit rounded-3xl px-8 py-1.5">
                       {item.count}
                     </p>
                   </div>
