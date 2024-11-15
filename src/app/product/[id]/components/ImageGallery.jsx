@@ -1,22 +1,23 @@
-"use client";
+'use client';
 import { useState } from "react";
 import Image from "next/image";
 
 const ImageGallery = ({ images, thumbnail, title }) => {
-  const [mainImage, setMainImage] = useState(thumbnail);
+  const [mainImage, setMainImage] = useState(images[0]);
 
   return (
-    <div className="grid grid-cols-3 grid-rows-4 gap-4">
-      {/* Main Image */}
+    <div className="grid grid-cols-3 bg-saddle100 border-xl">
+     
+     <div className="col-span-3 place-self-center ">
       <Image
-        className="col-span-3 row-span-3 flex items-center justify-center"
         src={mainImage}
-        width={250}
+        width={400}
         height={250}
         alt={title}
       />
+     </div>
 
-      {/* Thumbnails */}
+  
       {images.map((image, index) => (
         <Image
           key={index}
@@ -24,8 +25,8 @@ const ImageGallery = ({ images, thumbnail, title }) => {
           width={100}
           height={100}
           alt={`${title} thumbnail ${index + 1}`}
-          className="cursor-pointer"
-          onClick={() => setMainImage(image)} // Set clicked thumbnail as main image
+          className="cursor-pointer place-self-center"
+          onClick={() => setMainImage(image)} 
         />
       ))}
     </div>

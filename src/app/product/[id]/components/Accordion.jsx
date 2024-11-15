@@ -17,7 +17,7 @@ const Accordion = ({ productId }) => {
   }, [productId]); 
 
   return (
-    <section className="w-full max-w-2xl mx-auto px-4 md:px-6 py-24 rounded-lg bg-saddle50">
+    <section className="w-auto mx-auto px-4 py-24 rounded-lg bg-saddle50">
       {aboutData ? (
         <Item
           key={aboutData.id}
