@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Cart from "./components/Cart";
 import { useState, useEffect } from "react";
+import CTA from "./components/CTA";
 
 export default function Products() {
   const [data, setData] = useState([]);
@@ -72,12 +73,11 @@ export default function Products() {
                   </div>
                 </div>
               </Link>
-              <button
-                onClick={() => addToCart(product)}
-                className="hover:bg-green border hover:text-saddle50 text-saddle900  py-2 px-4 rounded-3xl"
-              >
-                <span>Add to Cart</span>
-              </button>
+              <CTA
+                content="Add to Cart"
+                addToCart={addToCart}
+                product={product}
+              />
             </div>
           </article>
         ))}

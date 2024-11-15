@@ -30,7 +30,7 @@ const Cart = ({ items, removeFromCart }) => {
   };
 
   return (
-    <section className="top-0 right-0 absolute md:relative  bg-saddle50  text-saddle900  stroke-saddle900  border p-6 rounded-lg h-fit w-full lg:w-full xl:w-full">
+    <section className="top-0 right-0 absolute md:relative bg-saddle900  md:bg-saddle100  md:text-saddle900 text-saddle50  p-6 rounded-lg h-fit w-full lg:w-full xl:w-full">
       <header
         className="flex place-content-center place-items-center place-self-center p-2 md:hidden transition duration-200 ease-linear "
         onClick={() => setIsOpen(!isOpen)}
@@ -76,12 +76,12 @@ const Cart = ({ items, removeFromCart }) => {
                   <div className="flex gap-2 place-items-start align-middle">
                     <button
                       onClick={() => removeFromCart(item.id)}
-                      className="text-saddle900 p-1"
+                      className="text-saddle50 md:text-saddle900 p-1"
                       title="Remove one from cart"
                     >
                       <BsTrash3 />
                     </button>
-                    <p className=" text-saddle900 dark:text-saddle50 stroke-saddle900 border w-fit rounded-3xl px-8 py-1.5 ">
+                    <p className=" md:text-saddle900 text-saddle50 stroke-saddle900 border w-fit rounded-3xl px-8 py-1.5 ">
                       {item.count}
                     </p>
                   </div>
@@ -97,7 +97,7 @@ const Cart = ({ items, removeFromCart }) => {
         </div>
         <button
           onClick={handleCheckout}
-          className="w-full hover:bg-green border stroke-green hover:text-saddle50 text-saddle900 py-2 px-4 rounded-3xl transition-colors mt-4"
+          className="w-full hover:bg-green border stroke-green md:text-saddle900 text-saddle50 py-2 px-4 rounded-3xl transition-colors mt-4"
         >
           Proceed to Checkout
         </button>
