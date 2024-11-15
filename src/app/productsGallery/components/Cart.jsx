@@ -97,7 +97,7 @@ const Cart = ({ items, removeFromCart }) => {
         </div>
         <button
           onClick={handleCheckout}
-          className="w-full hover:bg-green border stroke-green md:text-saddle900 text-saddle50 py-2 px-4 rounded-3xl transition-colors mt-4"
+          className="w-full hover:bg-green border stroke-green md:text-saddle900 text-saddle50 hover:text-saddle50 py-2 px-4 rounded-3xl transition-colors mt-4"
         >
           Proceed to Checkout
         </button>
