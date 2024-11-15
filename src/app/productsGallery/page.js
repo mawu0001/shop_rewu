@@ -74,7 +74,7 @@ export default function Products() {
               </Link>
               <button
                 onClick={() => addToCart(product)}
-                className="hover:bg-green border hover:text-saddle50 text-saddle900 dark:text-saddle50 py-2 px-4 rounded-3xl"
+                className="hover:bg-green border hover:text-saddle50 text-saddle900  py-2 px-4 rounded-3xl"
               >
                 <span>Add to Cart</span>
               </button>

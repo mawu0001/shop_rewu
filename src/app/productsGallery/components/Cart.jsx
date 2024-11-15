@@ -30,7 +30,7 @@ const Cart = ({ items, removeFromCart }) => {
   };
 
   return (
-    <section className="top-0 right-0 absolute md:relative  bg-saddle50 dark:bg-saddle900 text-saddle900 dark:text-saddle50 stroke-saddle900 dark:stroke-saddle50 border p-6 rounded-lg h-fit w-full lg:w-full xl:w-full">
+    <section className="top-0 right-0 absolute md:relative  bg-saddle50  text-saddle900  stroke-saddle900  border p-6 rounded-lg h-fit w-full lg:w-full xl:w-full">
       <header
         className="flex place-content-center place-items-center place-self-center p-2 md:hidden transition duration-200 ease-linear "
         onClick={() => setIsOpen(!isOpen)}
@@ -50,41 +50,45 @@ const Cart = ({ items, removeFromCart }) => {
       >
         {isOpen && (
           <BsFullscreenExit
-            className="absolute right-2 top-2 text-saddle50 dark:text-saddle900"
+            className="absolute right-2 top-2 text-saddle50 "
             onClick={() => setIsOpen(false)}
           />
         )}
         <p className="text-center font-semibold">Cart</p>
         <ul className=" flex flex-col gap-4">
-          {items.map((item) => (
-            <li
-              key={item.id}
-              className="my-2 grid text-xs  sm:text-sm md:text-base l:text-l"
-            >
-              {/* <Image
-                src={item.image}
-                width={250}
-                height={250}
-                alt={item.title}
-              /> */}
-              <div className="flex place-content-between gap-2">
-                <p className="col-start-1">{item.title}</p>
-                <p>${item.price}</p>
-              </div>
-              <div className="flex gap-2 place-items-start align-middle">
-                <button
-                  onClick={() => removeFromCart(item.id)}
-                  className="text-saddle50 p-1"
-                  title="Remove one from cart"
-                >
-                  <BsTrash3 />
-                </button>
-                <p className=" text-saddle900 dark:text-saddle50 stroke-saddle900 border w-fit rounded-3xl px-8 py-1.5 ">
-                  {item.count}
-                </p>
-              </div>
-            </li>
-          ))}
+          {items.map((item) => {
+            return (
+              <li
+                key={item.id}
+                className="my-2 flex  sm:text-sm md:text-base l:text-l w-full gap-3 place-items-center"
+              >
+                <Image
+                  src={item.thumbnail}
+                  width={100}
+                  height={100}
+                  alt={item.title}
+                />
+                <div>
+                  <div className="flex place-content-between gap-2 w-full">
+                    <p className="col-start-1">{item.title}</p>
+                    <p>${item.price}</p>
+                  </div>
+                  <div className="flex gap-2 place-items-start align-middle">
+                    <button
+                      onClick={() => removeFromCart(item.id)}
+                      className="text-saddle900 p-1"
+                      title="Remove one from cart"
+                    >
+                      <BsTrash3 />
+                    </button>
+                    <p className=" text-saddle900 dark:text-saddle50 stroke-saddle900 border w-fit rounded-3xl px-8 py-1.5 ">
+                      {item.count}
+                    </p>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
         </ul>
         <div className="mt-4">
           <p className="text-center font-semibold">
@@ -93,7 +97,7 @@ const Cart = ({ items, removeFromCart }) => {
         </div>
         <button
           onClick={handleCheckout}
-          className="w-full hover:bg-green border stroke-green hover:text-saddle50 text-saddle900 dark:text-saddle50 py-2 px-4 rounded-3xl transition-colors mt-4"
+          className="w-full hover:bg-green border stroke-green hover:text-saddle50 text-saddle900 py-2 px-4 rounded-3xl transition-colors mt-4"
         >
           Proceed to Checkout
         </button>
