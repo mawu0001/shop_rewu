@@ -50,7 +50,7 @@ function PaymentContent() {
       </Link>
 
       <div className="grid gap-8">
-        <div className="bg-saddle50 dark:bg-saddle900 p-6 rounded-lg">
+        <div className="bg-saddle50  p-6 rounded-lg">
           <h2 className="text-2xl font-semibold mb-6">Order Summary</h2>
           <div className="space-y-4">
             {cartItems.map((item) => (

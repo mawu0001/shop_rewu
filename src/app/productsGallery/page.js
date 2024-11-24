@@ -65,7 +65,7 @@ export default function Products() {
   };
 
   return (
-    <div className="grid grid-cols-7 relative my-8 gap-4">
+    <div className="grid grid-cols-7 relative my-8 gap-4 mx-6">
       <div className="col-span-7 md:col-span-5">
         {/* Category Dropdown */}
         <CategoryDropdown
@@ -74,10 +74,10 @@ export default function Products() {
           onCategoryChange={setSelectedCategory}
         />
 
-        <div className="grid grid-cols-3 gap-4 place-content-center">
+        <div className="grid grid-cols-2 gap-4 place-content-center md:grid-cols-3">
           {filteredData.map((product) => (
             <article key={product.id}>
-              <div className="p-3 rounded-lg bg-saddle100 text-xs sm:text-sm md:text-base l:text-l flex flex-col place-items-center min-h-80 sm:min-h-96">
+              <div className="p-3 rounded-lg bg-saddle100 text-xs sm:text-sm md:text-base l:text-l grid place-content-between place-items-center min-h-80 sm:min-h-96">
                 <Link
                   href={`/product/${product.id}`}
                   className="grid grid-rows-3"

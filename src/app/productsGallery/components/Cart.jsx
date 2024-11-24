@@ -37,7 +37,7 @@ const Cart = ({ items, removeFromCart }) => {
       />
 
       <div
-        className={`m-5 p-6 rounded-lg relative md:static md:min-w-80 ${
+        className={` rounded-lg relative md:static md:min-w-80 flex flex-col  ${
           isOpen ? "block" : "hidden"
         } md:block`}
       >
@@ -69,7 +69,7 @@ const Cart = ({ items, removeFromCart }) => {
                   <div className="flex gap-2 place-items-start align-middle">
                     <button
                       onClick={() => removeFromCart(item.id)}
-                      className="text-saddle50 md:text-saddle900 p-1"
+                      className="text-saddle50 md:text-saddle900 p-1 place-self-center"
                       title="Remove one from cart"
                     >
                       <BsTrash3 />
@@ -90,7 +90,7 @@ const Cart = ({ items, removeFromCart }) => {
         </div>
         <button
           onClick={handleCheckout}
-          className="w-full hover:bg-green border stroke-green md:text-saddle900 text-saddle50 hover:text-saddle50 py-2 px-4 rounded-3xl transition-colors mt-4"
+          className=" hover:bg-green border stroke-green md:text-saddle900 text-saddle50 hover:text-saddle50 py-2 px-4 rounded-3xl transition-colors mt-4 w-fit place-self-center "
         >
           Proceed to Checkout
         </button>
