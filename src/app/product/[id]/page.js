@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Accordion from "./components/Accordion";
 import ImageGallery from "./components/ImageGallery";
+import Breadcrumb from "./components/Breadcrumb";
 
 
 const Singleview = async ({ params }) => {
@@ -8,7 +9,16 @@ const Singleview = async ({ params }) => {
   const response = await fetch(`https://dummyjson.com/products/${id}`);
   const product = await response.json();
 
-  return (
+  const breadcrumbs = [
+    {label: "Home", href: "/home"}, 
+    {label: "Products", href:"/products"}, 
+    {label: product.title},
+  ];
+
+  return ( 
+    <div> 
+        <Breadcrumb />
+        
     <section className="flex flex-col gap-8 py-6 md:grid md:grid-cols-2 md:gap-12">
         <div className="md:order-1 w-full"></div>
       <ImageGallery
@@ -30,6 +40,7 @@ const Singleview = async ({ params }) => {
         <Accordion productId={id}/>
       </div>
     </section>
+    </div>
   );
 };
 
