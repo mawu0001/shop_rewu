@@ -17,7 +17,6 @@ export default function Home() {
       <Image src={mockupImage} alt="Image with make-up product, nail polish, perfume and chili" width={200} height={200} objectFit="contain"/>
 
     </div> */}
-    
   </section>
   );
 }
