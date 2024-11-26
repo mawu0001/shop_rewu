@@ -16,7 +16,7 @@ const Singleview = async ({ params }) => {
   ];
 
   return ( 
-    <div> 
+    <div className="mx-8"> 
         <Breadcrumb />
         
     <section className="flex flex-col gap-8 py-6 md:grid md:grid-cols-2 md:gap-12">
@@ -35,7 +35,7 @@ const Singleview = async ({ params }) => {
         <div className="text-2xl font-medium">{product.title}</div>
         <div className="text-lg font-light">{product.category}</div>
         <div className="text-normal font-medium py-6">{product.description}</div>
-        <button className="bg-green text-saddle50 py-2 px-6 rounded-lg text-lg hover:bg-saddle900">Add To Cart</button>
+        <button className="hover:bg-green border hover:text-saddle50 text-saddle900  py-2 px-4 rounded-3xln">Add To Cart</button>
         <div className="text-xl font-medium pt-8 hidden md:block">{product.price}</div>
         <Accordion productId={id}/>
       </div>
