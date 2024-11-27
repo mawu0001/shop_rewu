@@ -14,32 +14,48 @@ export default function Products() {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchProductsAndCategories = async () => {
+      // Fetch products
       let response = await fetch("https://dummyjson.com/products");
       let products = await response.json();
       setData(products.products);
       setFilteredData(products.products);
 
-      // Extract categories from products
-      const uniqueCategories = [
-        "All",
-        ...new Set(products.products.map((product) => product.category)),
-      ];
-      setCategories(uniqueCategories);
+      // Fetch categories
+      const categoryResponse = await fetch(
+        "https://dummyjson.com/products/categories"
+      );
+      const categoryData = await categoryResponse.json();
+
+      // Log the category data to check its structure
+      console.log("Category Data:", categoryData);
+
+      // Extract category names (or slugs) from the response
+      const categoryNames = categoryData.map((category) => category.slug);
+
+      // Set the categories, including the 'All' option
+      setCategories(["All", ...categoryNames]);
     };
 
-    fetchProducts();
+    fetchProductsAndCategories();
   }, []);
 
+  // Handle category selection and filtering products
   useEffect(() => {
+    console.log("Selected Category:", selectedCategory); // Log selected category
+    console.log("Categories Array:", categories); // Log the available categories
+
     if (selectedCategory === "All") {
-      setFilteredData(data);
+      setFilteredData(data); // Show all products if 'All' is selected
     } else {
-      setFilteredData(
-        data.filter((product) => product.category === selectedCategory)
+      // Filter products based on the selected category
+      const filtered = data.filter(
+        (product) => product.category === selectedCategory
       );
+      console.log("Filtered Products:", filtered); // Log the filtered products
+      setFilteredData(filtered);
     }
-  }, [selectedCategory, data]);
+  }, [selectedCategory, data, categories]); // Trigger this effect when category changes
 
   const addToCart = (product) => {
     setCartItems((prevItems) => {
