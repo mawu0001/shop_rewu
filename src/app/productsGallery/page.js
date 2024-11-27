@@ -49,7 +49,6 @@ export default function Products() {
   return (
     <div className="grid grid-cols-7 relative my-8 gap-4 mx-6">
       <div className="col-span-7 md:col-span-5">
-        {/* Category Dropdown */}
         <CategoryDropdown products={data} setFilteredData={setFilteredData} />
 
         <div className="grid grid-cols-2 gap-4 place-content-center md:grid-cols-3">

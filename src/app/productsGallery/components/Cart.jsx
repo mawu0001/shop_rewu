@@ -39,7 +39,7 @@ const Cart = ({ items, removeFromCart }) => {
       <div
         className={` rounded-lg relative md:static md:min-w-80 flex flex-col  ${
           isOpen ? "block" : "hidden"
-        } md:block`}
+        } md:flex md:place-content-center`}
       >
         {isOpen && (
           <BsFullscreenExit
