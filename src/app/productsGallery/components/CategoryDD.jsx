@@ -1,4 +1,35 @@
-const DropDrown = ({ categories, selectedCategory, onCategoryChange }) => {
+import { useState, useEffect } from "react";
+
+const Dropdown = ({ products, setFilteredData }) => {
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const categoryResponse = await fetch(
+        "https://dummyjson.com/products/categories"
+      );
+      const categoryData = await categoryResponse.json();
+
+      setCategories(["All", ...categoryData]);
+    };
+
+    fetchCategories();
+  }, []);
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+
+    if (category === "All") {
+      setFilteredData(products);
+    } else {
+      const filteredProducts = products.filter(
+        (product) => product.category === category
+      );
+      setFilteredData(filteredProducts);
+    }
+  };
+
   return (
     <div className="mb-4">
       <label
@@ -10,29 +41,20 @@ const DropDrown = ({ categories, selectedCategory, onCategoryChange }) => {
       <select
         id="category"
         value={selectedCategory}
-        onChange={(e) => onCategoryChange(e.target.value)}
+        onChange={(e) => handleCategoryChange(e.target.value)}
         className="block w-fit px-3 py-2 bg-saddle100 rounded-md shadow-sm"
       >
-        {categories.map((category) => {
-          // If category is a string (e.g., "All")
-          if (typeof category === "string") {
-            return (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            );
-          }
-
-          // If category is an object (e.g., { slug: "beauty", name: "Beauty" })
-          return (
-            <option key={category.slug} value={category.slug}>
-              {category.name}
-            </option>
-          );
-        })}
+        {categories.map((category) => (
+          <option
+            key={category === "All" ? category : category.slug}
+            value={category === "All" ? category : category.slug}
+          >
+            {category === "All" ? category : category.name}
+          </option>
+        ))}
       </select>
     </div>
   );
 };
 
-export default DropDrown;
+export default Dropdown;

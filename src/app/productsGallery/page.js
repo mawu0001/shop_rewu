@@ -10,52 +10,18 @@ export default function Products() {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [cartItems, setCartItems] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
-    const fetchProductsAndCategories = async () => {
+    const fetchProducts = async () => {
       // Fetch products
       let response = await fetch("https://dummyjson.com/products");
       let products = await response.json();
       setData(products.products);
       setFilteredData(products.products);
-
-      // Fetch categories
-      const categoryResponse = await fetch(
-        "https://dummyjson.com/products/categories"
-      );
-      const categoryData = await categoryResponse.json();
-
-      // Log the category data to check its structure
-      console.log("Category Data:", categoryData);
-
-      // Extract category names (or slugs) from the response
-      const categoryNames = categoryData.map((category) => category.slug);
-
-      // Set the categories, including the 'All' option
-      setCategories(["All", ...categoryNames]);
     };
 
-    fetchProductsAndCategories();
+    fetchProducts();
   }, []);
-
-  // Handle category selection and filtering products
-  useEffect(() => {
-    console.log("Selected Category:", selectedCategory); // Log selected category
-    console.log("Categories Array:", categories); // Log the available categories
-
-    if (selectedCategory === "All") {
-      setFilteredData(data); // Show all products if 'All' is selected
-    } else {
-      // Filter products based on the selected category
-      const filtered = data.filter(
-        (product) => product.category === selectedCategory
-      );
-      console.log("Filtered Products:", filtered); // Log the filtered products
-      setFilteredData(filtered);
-    }
-  }, [selectedCategory, data, categories]); // Trigger this effect when category changes
 
   const addToCart = (product) => {
     setCartItems((prevItems) => {
@@ -84,11 +50,7 @@ export default function Products() {
     <div className="grid grid-cols-7 relative my-8 gap-4 mx-6">
       <div className="col-span-7 md:col-span-5">
         {/* Category Dropdown */}
-        <CategoryDropdown
-          categories={categories}
-          selectedCategory={selectedCategory}
-          onCategoryChange={setSelectedCategory}
-        />
+        <CategoryDropdown products={data} setFilteredData={setFilteredData} />
 
         <div className="grid grid-cols-2 gap-4 place-content-center md:grid-cols-3">
           {filteredData.map((product) => (
